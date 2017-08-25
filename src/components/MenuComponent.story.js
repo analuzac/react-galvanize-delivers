@@ -6,7 +6,7 @@ import './MenuComponent.story.css';
 
 storiesOf('MenuComponent', module).add('Happy path', () =>
   <MenuComponent
-    items={[
+    menuItems={[
       {
         id: '1001',
         name: 'Some Item A',
