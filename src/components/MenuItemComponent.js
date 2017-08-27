@@ -1,10 +1,15 @@
 import React from 'react';
 
-export default function MenuItemComponent({ menuItem }) {
+export default function MenuItemComponent({ menuItem, onAddItem }) {
+  function handleClick(event) {
+    event.preventDefault();
+    onAddItem(menuItem.id);
+  }
+
   return (
     <div className="card MenuItemComponent">
       <div className="card-image">
-        <img src={menuItem.imagePath} />
+        <img src={menuItem.imagePath} alt={''} />
       </div>
       <div className="card-content">
         <h5 className="card-title">
@@ -15,7 +20,9 @@ export default function MenuItemComponent({ menuItem }) {
         </p>
       </div>
       <div className="card-action">
-        <a href="#">ADD TO ORDER</a>
+        <a href="a" onClick={handleClick}>
+          ADD TO ORDER
+        </a>
       </div>
     </div>
   );

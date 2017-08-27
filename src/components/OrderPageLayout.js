@@ -17,8 +17,8 @@ export default function OrderPageLayout(props) {
           </div>
         </nav>
       </header>
-      <div class="container">
-        <div class="section">
+      <div className="container">
+        <div className="section">
           <div className="row">
             <div id="menu" className="col s12 m8">
               {<h4 className="indigo-text">Menu</h4>}

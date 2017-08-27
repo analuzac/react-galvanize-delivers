@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function OrderFormComponent({ customerInfo }) {
   return (
-    <form id="form" class="col s12 m12">
+    <form id="form" className="col s12 m12">
       <div className="row">
         <div className="input-field col s12 m12">
           <i className="material-icons prefix indigo-text">account_circle</i>

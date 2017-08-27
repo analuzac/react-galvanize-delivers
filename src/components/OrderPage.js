@@ -5,11 +5,16 @@ import MenuComponent from './MenuComponent';
 import OrderTableComponent from './OrderTableComponent';
 import OrderFormComponent from './OrderFormComponent';
 
-export default function OrderPage({ menuItems, orderItems, customerInfo }) {
+export default function OrderPage({
+  menuItems,
+  orderItems,
+  customerInfo,
+  onAddItem
+}) {
   return (
     <div className="OrderPage">
       <OrderPageLayout>
-        <MenuComponent menuItems={menuItems} />
+        <MenuComponent menuItems={menuItems} onAddItem={onAddItem} />
         <OrderTableComponent orderItems={orderItems} />
         <OrderFormComponent customerInfo={customerInfo} />
       </OrderPageLayout>

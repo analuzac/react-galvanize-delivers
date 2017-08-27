@@ -58,10 +58,11 @@ let customerInfo = {
   address: '123 Main Street, Oakland, CA'
 };
 
-storiesOf('OrderPageLayout', module).add('Happy path', () =>
+storiesOf('OrderPage', module).add('Happy path', () =>
   <OrderPage
     menuItems={menuItems}
     orderItems={orderItems}
     customerInfo={customerInfo}
+    onAddItem={itemId => console.log(itemId)}
   />
 );

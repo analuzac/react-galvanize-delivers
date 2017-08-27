@@ -4,22 +4,21 @@ import MenuItemComponent from './MenuItemComponent';
 
 import './MenuItemComponent.story.css';
 
+let menuItem = {
+  id: 1001,
+  name: 'Some Item A',
+  price: 9.99,
+  imagePath: '//via.placeholder.com/300x200'
+};
+
 storiesOf('MenuItemComponent', module)
   .add('Complete item passed in', () =>
-    <MenuItemComponent
-      item={{
-        name: 'Some Item A',
-        price: 9.99,
-        imagePath: '//via.placeholder.com/300x200'
-      }}
-    />
+    <MenuItemComponent menuItem={menuItem} />
   )
-  .add('Incomplete item passed in', () =>
+  .add('To test AddItem', () =>
     <MenuItemComponent
-      item={{
-        imagePath: '//via.placeholder.com/300x200'
-      }}
+      menuItem={menuItem}
+      //onAddItem={menuItem.id}
+      onAddItem={itemId => console.log(menuItem.id)}
     />
-  )
-  .add('Empty item object passed in', () => <MenuItemComponent item={{}} />)
-  .add('No item passed in', () => <MenuItemComponent />);
+  );
