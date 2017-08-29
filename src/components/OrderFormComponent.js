@@ -4,7 +4,8 @@ export default class OrderFormComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      showBody: true
+      showBody: true,
+      hasValidationErrors: false
     };
   }
 
@@ -14,10 +15,21 @@ export default class OrderFormComponent extends Component {
     const name = $form.name.value.trim();
     const phone = $form.phone.value.trim();
     const address = $form.address.value.trim();
-    this.props.onSubmit({ name, phone, address });
-    console.log({ name, phone, address });
+    // this.props.onSubmit({ name, phone, address });
+    //console.log({ name, phone, address });
+
+    //let regPhone = /(?:\d{3}|\(\d{3}\))([-\/\.])\d{3}\1\d{4}/;
+    let regPhone = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+
+    if (phone.match(regPhone) || name !== null || address !== null) {
+      this.props.onSubmit({ name, phone, address });
+    } else {
+      this.setState({ hasValidationErrors: true });
+    }
   };
+
   render() {
+    //console.log(this.state, 'these are the props');
     return (
       <form id="form" className="col s12 m12" onSubmit={this.handleSubmit}>
         <div className="row">
@@ -28,9 +40,9 @@ export default class OrderFormComponent extends Component {
               id="name"
               type="text"
               className="validate"
+              placeholder="Name"
               required
             />
-            {/* <label for="name">Name</label> */}
           </div>
         </div>
 
@@ -42,9 +54,9 @@ export default class OrderFormComponent extends Component {
               id="phone"
               type="tel"
               className="validate"
+              placeholder="Phone Number"
               required
             />
-            {/* <label for="phone">Phone number</label> */}
           </div>
         </div>
 
@@ -56,9 +68,9 @@ export default class OrderFormComponent extends Component {
               id="address"
               type="text"
               className="validate"
+              placeholder="Address"
               required
             />
-            {/* <label for="address">Address</label> */}
           </div>
         </div>
 
@@ -70,8 +82,17 @@ export default class OrderFormComponent extends Component {
             className="btn-large waves-effect waves-light indigo lighten-1">
             PLACE ORDER
           </button>
+          {this.state.hasValidationErrors &&
+            <p style={styles.errorStyle}>Please submit valid inputs</p>}
         </div>
       </form>
     );
   }
 }
+
+const styles = {
+  errorStyle: {
+    color: 'red',
+    fontWeight: 'bold'
+  }
+};

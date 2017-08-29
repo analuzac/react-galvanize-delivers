@@ -49,6 +49,7 @@ function onSubmit(info) {
 
 function onClose() {
   customerInfo = null;
+  orderItems = [];
   render();
 }
 
