@@ -30,14 +30,26 @@ let menuItems = [
   }
 ];
 
-let customerInfo = {
-  name: 'Nestor Toro',
-  phone: '(650) 533-8676',
-  address: '123 Main Street, Oakland, CA'
-};
+// let customerInfo = {
+//   name: 'Nestor Toro',
+//   phone: '(650) 533-8676',
+//   address: '123 Main Street, Oakland, CA'
+// };
+
+let customerInfo = {};
 
 function onAddItem(itemId) {
   selectedItems(menuItems, itemId);
+}
+
+function onSubmit(info) {
+  customerInfo = info;
+  render();
+}
+
+function onClose() {
+  customerInfo = null;
+  render();
 }
 
 let orderItems = [];
@@ -49,6 +61,8 @@ function render() {
       orderItems={orderItems}
       customerInfo={customerInfo}
       onAddItem={onAddItem}
+      onSubmit={onSubmit}
+      onClose={onClose}
     />,
     document.getElementById('root')
   );

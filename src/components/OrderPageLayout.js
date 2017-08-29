@@ -26,8 +26,12 @@ export default function OrderPageLayout(props) {
             </div>
 
             <div className="col s12 m4">
-              {props.children[1]}
-              {props.children[2]}
+              <div className="row">
+                {props.children[1]}
+              </div>
+              <div className="row">
+                {props.children[2]}
+              </div>
             </div>
           </div>
         </div>

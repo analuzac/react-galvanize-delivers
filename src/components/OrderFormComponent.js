@@ -1,19 +1,29 @@
 import React from 'react';
 
-export default function OrderFormComponent({ customerInfo }) {
+export default function OrderFormComponent({ onSubmit = () => {} }) {
+  function handleSubmit(event) {
+    event.preventDefault();
+    const $form = event.target;
+    const name = $form.name.value.trim();
+    const phone = $form.phone.value.trim();
+    const address = $form.address.value.trim();
+    onSubmit({ name, phone, address });
+    console.log({ name, phone, address });
+  }
+
   return (
-    <form id="form" className="col s12 m12">
+    <form id="form" className="col s12 m12" onSubmit={handleSubmit}>
       <div className="row">
         <div className="input-field col s12 m12">
           <i className="material-icons prefix indigo-text">account_circle</i>
           <input
-            value={customerInfo.name}
+            // value={customerInfo.name}
             id="name"
             type="text"
             className="validate"
             required
           />
-          <label for="name">Name</label>
+          {/* <label for="name">Name</label> */}
         </div>
       </div>
 
@@ -21,13 +31,13 @@ export default function OrderFormComponent({ customerInfo }) {
         <div className="input-field col s12 m12">
           <i className="material-icons prefix indigo-text">phone</i>
           <input
-            value={customerInfo.phone}
+            // value={customerInfo.phone}
             id="phone"
             type="tel"
             className="validate"
             required
           />
-          <label for="phone">Phone number</label>
+          {/* <label for="phone">Phone number</label> */}
         </div>
       </div>
 
@@ -35,24 +45,24 @@ export default function OrderFormComponent({ customerInfo }) {
         <div className="input-field col s12 m12">
           <i className="material-icons prefix indigo-text">home</i>
           <input
-            value={customerInfo.address}
+            // value={customerInfo.address}
             id="address"
             type="text"
             className="validate"
             required
           />
-          <label for="address">Address</label>
+          {/* <label for="address">Address</label> */}
         </div>
       </div>
 
       <div className="row center">
-        <a
+        <button
           id="submit-button"
           type="submit"
           name="action"
           className="btn-large waves-effect waves-light indigo lighten-1">
           PLACE ORDER
-        </a>
+        </button>
       </div>
     </form>
   );

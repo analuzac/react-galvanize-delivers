@@ -18,7 +18,6 @@ storiesOf('MenuItemComponent', module)
   .add('To test AddItem', () =>
     <MenuItemComponent
       menuItem={menuItem}
-      //onAddItem={menuItem.id}
-      onAddItem={itemId => console.log(menuItem.id)}
+      onAddItem={itemId => console.log(itemId)}
     />
   );
