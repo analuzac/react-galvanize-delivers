@@ -62,12 +62,6 @@ storiesOf('OrderPageLayout', module).add('Happy path', () =>
         }
       ]}
     />
-    <OrderFormComponent
-      customerInfo={{
-        name: 'Nestor Toro',
-        phone: '(650) 533-8676',
-        address: '123 Main Street, Oakland, CA'
-      }}
-    />
+    <OrderFormComponent onSubmit={customerInfo => console.log(customerInfo)} />
   </OrderPageLayout>
 );
