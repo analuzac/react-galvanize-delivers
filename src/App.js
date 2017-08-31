@@ -15,11 +15,12 @@ export default class App extends Component {
         orderItems={this.state.orderItems}
         customerInfo={this.state.customerInfo}
         onAddItem={this._addItem}
-        onSubmitOrderForm={this._submitOrderForm}
-        onCloseOrderSuccessMessage={this._closeOrderSuccessMessage}
+        onSubmit={this._submitOrderForm}
+        onClose={this._closeOrderSuccessMessage}
       />
     );
   }
+
   componentDidMount() {
     getMenuItems().then(menuItems => {
       this.setState({
@@ -41,7 +42,9 @@ export default class App extends Component {
   };
 
   _submitOrderForm = ({ name, phone, address }) => {
-    this.setState({ name, phone, address });
+    this.setState({
+      customerInfo: { name, phone, address }
+    });
   };
 
   _closeOrderSuccessMessage = () => {
