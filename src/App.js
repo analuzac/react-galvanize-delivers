@@ -1,21 +1,53 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import OrderPage from './components/OrderPage';
+import getMenuItems from './requests/getMenuItems';
 
-class App extends Component {
+export default class App extends Component {
+  state = {
+    menuItems: null,
+    orderItems: [],
+    customerInfo: null
+  };
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <OrderPage
+        menuItems={this.state.menuItems}
+        orderItems={this.state.orderItems}
+        customerInfo={this.state.customerInfo}
+        onAddItem={this._addItem}
+        onSubmitOrderForm={this._submitOrderForm}
+        onCloseOrderSuccessMessage={this._closeOrderSuccessMessage}
+      />
     );
   }
-}
+  componentDidMount() {
+    getMenuItems().then(menuItems => {
+      this.setState({
+        menuItems
+      });
+    });
+  }
 
-export default App;
+  _addItem = itemId => {
+    //add a new item to the orderItems
+    this.setState(prevState => {
+      const menuItems = prevState.menuItems;
+      const orderItems = prevState.orderItems.slice(0);
+      orderItems.push(menuItems.find(menuItem => menuItem.id === itemId));
+      return {
+        orderItems
+      };
+    });
+  };
+
+  _submitOrderForm = ({ name, phone, address }) => {
+    this.setState({ name, phone, address });
+  };
+
+  _closeOrderSuccessMessage = () => {
+    this.setState({
+      customerInfo: null,
+      orderItems: []
+    });
+  };
+}
