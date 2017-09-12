@@ -64,4 +64,6 @@ describe('a shallow test', () => {
       .simulate('click');
     expect(onAddItem).toHaveBeenCalled();
   });
+
+  expect(shallowWrapper).toMatchSnapshot();
 });
