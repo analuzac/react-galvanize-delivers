@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import OrderPage from './components/OrderPage';
-import getMenuItems from './requests/getMenuItems';
+//import getMenuItems from './requests/getMenuItems';
+
+import getMenuItemsProcess from './redux/thunks/getMenuItemsProcess';
 
 export default class App extends Component {
   constructor(props) {
@@ -31,56 +33,27 @@ export default class App extends Component {
   }
 
   componentDidMount() {
-    // Before Redux:
-    // getMenuItems().then(menuItems => {
-    //   this.setState({
-    //     menuItems
-    //   });
-    // });
-
-    // WE FETCH DATA FROM INTERNAL DATA FOLDER
-    getMenuItems().then(menuItems => {
-      this.props.store.dispatch({ type: 'SET_ITEMS', menuItems });
-    });
+    this.props.store.dispatch(getMenuItemsProcess());
   }
 
   _addItem = itemId => {
-    // Before Redux:
-    // this.setState(prevState => {
-    //   const menuItems = prevState.menuItems;
-    //   const orderItems = prevState.orderItems.slice(0);
-    //   orderItems.push(menuItems.find(menuItem => menuItem.id === itemId));
-    //   return {
-    //     orderItems
-    //   };
-    // });
-
     let itemToBeAddedToState = this.state.menuItems.find(
       menuItem => menuItem.id === itemId
     );
 
-    this.props.store.dispatch({ type: 'SET_ADD_ITEM', itemToBeAddedToState });
+    this.props.store.dispatch({ type: 'ADD_ITEM', itemToBeAddedToState });
   };
 
   _submitOrderForm = ({ name, phone, address }) => {
-    // Before Redux:
-    // this.setState({
-    //   customerInfo: { name, phone, address }
     this.props.store.dispatch({
-      type: 'SET_SUBMIT_ORDER',
+      type: 'SUBMIT_ORDER',
       customerInfo: { name, phone, address }
     });
   };
 
   _closeOrderSuccessMessage = () => {
-    // Before Redux:
-    // this.setState({
-    //   customerInfo: null,
-    //   orderItems: []
-    // });
-
     this.props.store.dispatch({
-      type: 'SET_CLOSE_ORDER',
+      type: 'CLOSE_ORDER',
       customerInfo: null,
       orderItems: []
     });
