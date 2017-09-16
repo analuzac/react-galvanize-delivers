@@ -22,7 +22,9 @@ export default class OrderFormComponent extends Component {
     let regPhone = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
 
     if (phone.match(regPhone) || name !== null || address !== null) {
+      //debugger;
       this.props.onSubmit({ name, phone, address });
+      // this.props.onSubmit({ name, phone, address });
     } else {
       this.setState({ hasValidationErrors: true });
     }

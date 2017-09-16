@@ -13,7 +13,10 @@ export default function rootReducer(
     case 'ADD_ITEM':
       return {
         ...currentState,
-        orderItems: [...currentState.orderItems, action.itemToBeAddedToState]
+        orderItems: [
+          ...currentState.orderItems,
+          currentState.menuItems.find(menuItem => menuItem.id === action.itemId)
+        ]
       };
     case 'SUBMIT_ORDER':
       return { ...currentState, customerInfo: action.customerInfo };

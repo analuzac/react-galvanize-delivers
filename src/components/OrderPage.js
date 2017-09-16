@@ -11,8 +11,8 @@ export default function OrderPage({
   orderItems,
   customerInfo,
   onAddItem,
-  onSubmit,
-  onClose
+  onSubmitOrderForm,
+  onCloseOrderSuccessMessage
 }) {
   return (
     <div className="OrderPage">
@@ -23,9 +23,9 @@ export default function OrderPage({
         {customerInfo
           ? <OrderSuccessMessageComponent
               customerInfo={customerInfo}
-              onClose={onClose}
+              onClose={onCloseOrderSuccessMessage}
             />
-          : <OrderFormComponent onSubmit={onSubmit} />}
+          : <OrderFormComponent onSubmit={onSubmitOrderForm} />}
       </OrderPageLayout>
     </div>
   );
